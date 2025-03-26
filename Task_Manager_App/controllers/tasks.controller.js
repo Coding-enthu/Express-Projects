@@ -1,7 +1,6 @@
 const Task = require("../models/task.models.js");
 const asyncWrapper = require("../middleware/async.js");
-const {createCustomError} = require("../Errors/custom-error.js");
-
+const { createCustomError } = require("../Errors/custom-error.js");
 
 const getAllTasks = asyncWrapper(async (req, res) => {
 	const tasks = await Task.find();
@@ -21,8 +20,7 @@ const getTask = asyncWrapper(async (req, res, next) => {
 	const task = await Task.findOne({ _id: taskID });
 
 	if (!task) {
-        return next(createCustomError(`No task with id: ${taskID}`, 404));
-        	
+		return next(createCustomError(`No task with id: ${taskID}`, 404));
 	}
 
 	res.status(200).json({ task });
